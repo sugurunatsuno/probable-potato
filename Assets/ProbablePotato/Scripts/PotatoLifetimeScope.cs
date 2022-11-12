@@ -3,6 +3,7 @@ using VContainer.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MessagePipe;
 
 namespace ProbablePotato
 {
@@ -29,7 +30,11 @@ namespace ProbablePotato
             builder.RegisterEntryPoint<PotatoPresenter>();
             builder.RegisterComponent(potatoScreen);
             builder.RegisterComponent(potatoModelViewPrefab);
-            builder.Register<PotatoFactory>(Lifetime.Scoped);
+
+            var options = builder.RegisterMessagePipe();
+            builder.RegisterMessageBroker<PotatoModel>(options);
+            builder.Register<PotatoFactory>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<PotatoTotalPresenter>();
         }
     }
 

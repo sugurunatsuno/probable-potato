@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using System;
+using MessagePipe;
+using MessagePipe.VContainer;
 
 namespace ProbablePotato
 {
@@ -9,12 +14,16 @@ namespace ProbablePotato
         readonly PotatoSeedService potatoSeedService;
         readonly PotatoModelView potatoModelView;
 
+        private readonly IPublisher<PotatoModel> publisher;
+
         public PotatoFactory(
            PotatoSeedService potatoSeedService,
-           PotatoModelView potatoModelView)
+           PotatoModelView potatoModelView,
+           IPublisher<PotatoModel> publisher)
         {
             this.potatoSeedService = potatoSeedService;
             this.potatoModelView = potatoModelView;
+            this.publisher = publisher;
         }
 
         /// <summary>
@@ -22,11 +31,17 @@ namespace ProbablePotato
         /// ÉVÅ[Éìè„Ç…GameObjectÇ‡çÏê¨Ç∑ÇÈ
         /// </summary>
         /// <returns></returns>
-        public PotatoModelView Create()
+        public async UniTask<PotatoModelView> Create(String groupID)
         {
-            var potato = new PotatoModel(potatoSeedService.GeneratePotatoStatus());
-            var potatoView = Object.Instantiate(this.potatoModelView);
+            var potato = new PotatoModel(potatoSeedService.GeneratePotatoStatus(), groupID);
+
+            await UniTask.Delay((int)(potato.Value * 1000));
+
+            var potatoView = UnityEngine.GameObject.Instantiate(this.potatoModelView);
             potatoModelView.Construct(potato);
+
+            publisher.Publish(potato);
+
             return potatoModelView;
         }
     }

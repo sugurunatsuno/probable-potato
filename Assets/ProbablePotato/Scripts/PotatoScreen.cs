@@ -12,6 +12,8 @@ namespace ProbablePotato
     public class PotatoScreen : MonoBehaviour
     {
         public Button PotatoButton;
+
+        public Text PotatoTotalText;
     }
 
 }

@@ -189,17 +189,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &628155972 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5813207964420988593, guid: 2232ae02510fbd64082cf7f902beced7, type: 3}
-  m_PrefabInstance: {fileID: 5813207964906436853}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f4e746e350abf4e81416937fdef8a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &790873011
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +462,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2232ae02510fbd64082cf7f902beced7, type: 3}
+--- !u!114 &5813207964906436854 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2756499999408337876, guid: 2232ae02510fbd64082cf7f902beced7, type: 3}
+  m_PrefabInstance: {fileID: 5813207964906436853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f4e746e350abf4e81416937fdef8a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8004654376696229690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -531,6 +531,6 @@ PrefabInstance:
     - target: {fileID: 8004654376793593175, guid: afb3cea2fbc51ae45a4d158f310d7a3a, type: 3}
       propertyPath: potatoScreen
       value: 
-      objectReference: {fileID: 628155972}
+      objectReference: {fileID: 5813207964906436854}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afb3cea2fbc51ae45a4d158f310d7a3a, type: 3}
