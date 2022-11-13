@@ -14,38 +14,26 @@ namespace ProbablePotato
     /// </summary>
     public class PotatoTotalPresenter : IStartable
     {
-        List<PotatoModel> potatoes = new List<PotatoModel>();
-
         readonly PotatoScreen potatoScreen;
 
+        private float total = 0.0f;
 
         [Inject]
-        private ISubscriber<PotatoModel> subscriber;
+        private ISubscriber<float> subscriber;
 
         PotatoTotalPresenter(
             PotatoScreen potatoScreen)
         {
             this.potatoScreen = potatoScreen;
-
-
         }
 
         void IStartable.Start()
         {
             // メッセージを受信してUIの値を更新する
-            subscriber.Subscribe((potato) => 
+            subscriber.Subscribe((value) => 
             {
-                UnityEngine.Debug.Log("received: " + potato.Value.ToString() + ", " + potato.GroupID);
-
-                potatoes.Add(potato);
-
-                var total = 0.0f;
-                foreach(var p in potatoes)
-                {
-                    total += p.Value;
-                }
-
-                this.potatoScreen.PotatoTotalText.text = total.ToString();
+                total += value;
+                this.potatoScreen.PotatoTotalText.text = "total: " + total.ToString("F2") + ", prev: " + value.ToString("F2");
             });
         }
     }

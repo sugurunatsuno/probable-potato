@@ -32,7 +32,7 @@ namespace ProbablePotato
             builder.RegisterComponent(potatoModelViewPrefab);
 
             var options = builder.RegisterMessagePipe();
-            builder.RegisterMessageBroker<PotatoModel>(options);
+            builder.RegisterMessageBroker<float>(options);
             builder.Register<PotatoFactory>(Lifetime.Singleton);
             builder.RegisterEntryPoint<PotatoTotalPresenter>();
         }

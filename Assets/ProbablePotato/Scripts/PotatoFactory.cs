@@ -14,33 +14,38 @@ namespace ProbablePotato
         readonly PotatoSeedService potatoSeedService;
         readonly PotatoModelView potatoModelView;
 
-        private readonly IPublisher<PotatoModel> publisher;
-
         public PotatoFactory(
            PotatoSeedService potatoSeedService,
-           PotatoModelView potatoModelView,
-           IPublisher<PotatoModel> publisher)
+           PotatoModelView potatoModelView)
         {
             this.potatoSeedService = potatoSeedService;
             this.potatoModelView = potatoModelView;
-            this.publisher = publisher;
         }
 
         /// <summary>
         /// potatoオブジェクトの作成
-        /// シーン上にGameObjectも作成する
         /// </summary>
         /// <returns></returns>
-        public async UniTask<PotatoModelView> Create(String groupID)
+        public async UniTask<PotatoModel> Create(String groupID)
         {
             var potato = new PotatoModel(potatoSeedService.GeneratePotatoStatus(), groupID);
 
             await UniTask.Delay((int)(potato.Value * 1000));
 
-            var potatoView = UnityEngine.GameObject.Instantiate(this.potatoModelView);
-            potatoModelView.Construct(potato);
+            return potato;
+        }
 
-            publisher.Publish(potato);
+        /// <summary>
+        /// potatoオブジェクトをもとにゲームオブジェクトを作成する関数
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public PotatoModelView GeneratePotatoModelView(PotatoModel model)
+        {
+            var potatoView = UnityEngine.GameObject.Instantiate(this.potatoModelView);
+            potatoModelView.Construct(model);
+
+            // publisher.Publish(potato);
 
             return potatoModelView;
         }
