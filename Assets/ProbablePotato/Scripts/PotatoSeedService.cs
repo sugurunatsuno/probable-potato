@@ -9,31 +9,9 @@ namespace ProbablePotato
 {
     public class PotatoSeedService
     {
-        private SHA256CryptoServiceProvider cryptoServiceProvider;
-
         PotatoSeedService()
         {
-            // UnityEngine.Random.InitState(DateTime.Now.Millisecond);
-            cryptoServiceProvider = new SHA256CryptoServiceProvider();
-        }
 
-        /// <summary>
-        /// ÉOÉãÅ[ÉvIDÇçÏÇÈä÷êî
-        /// </summary>
-        /// <returns></returns>
-        public String GeneratePotatoGroup()
-        {
-            var seed = UnityEngine.Random.Range(0f, 1f);
-            
-            var hashBytes = cryptoServiceProvider.ComputeHash(Encoding.UTF8.GetBytes(seed.ToString()));
-
-            var hashStr = new StringBuilder();
-            foreach(var h in hashBytes)
-            {
-                hashStr.Append(h.ToString("x2"));
-            }
-
-            return hashStr.ToString();
         }
 
         /// <summary>

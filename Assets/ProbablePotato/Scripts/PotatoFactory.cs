@@ -26,9 +26,9 @@ namespace ProbablePotato
         /// potatoオブジェクトの作成
         /// </summary>
         /// <returns></returns>
-        public async UniTask<PotatoModel> Create(String groupID)
+        public async UniTask<PotatoModel> Create()
         {
-            var potato = new PotatoModel(potatoSeedService.GeneratePotatoStatus(), groupID);
+            var potato = new PotatoModel(potatoSeedService.GeneratePotatoStatus());
 
             await UniTask.Delay((int)(potato.Value * 1000));
 

@@ -33,7 +33,7 @@ namespace ProbablePotato
 
             var options = builder.RegisterMessagePipe();
             builder.RegisterMessageBroker<float>(options);
-            builder.Register<PotatoFactory>(Lifetime.Singleton);
+            builder.Register<PotatoFactory>(Lifetime.Scoped);
             builder.RegisterEntryPoint<PotatoTotalPresenter>();
         }
     }

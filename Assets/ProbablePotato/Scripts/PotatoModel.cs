@@ -11,10 +11,9 @@ namespace ProbablePotato
     [System.Serializable]
     public class PotatoModel: IValueModel
     {
-        public PotatoModel(float generateTime, string groupID)
+        public PotatoModel(float generateTime)
         {
             this.value = generateTime;
-            this.groupID = groupID;
         }
 
         /// <summary>
@@ -23,14 +22,7 @@ namespace ProbablePotato
         [SerializeField]
         private float value = 0.0f;
 
-        /// <summary>
-        /// 所属するグループID、生成時のグループごとに同じIDになる
-        /// </summary>
-        [SerializeField]
-        private string groupID = "";
-
         public float Value { get => value; set => this.value = value; }
-        public string GroupID { get => groupID; set => groupID = value; }
     }
 
 }

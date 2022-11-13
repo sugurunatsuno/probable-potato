@@ -14,6 +14,8 @@ namespace ProbablePotato
         readonly PotatoSeedService potatoSeedService;
         readonly IPublisher<float> publisher;
 
+        public List<IValueModel> valueModels = new List<IValueModel>();
+
         public PotatoPresenter(
             PotatoFactory potatoFactory,
             PotatoScreen potatoScreen,
@@ -43,13 +45,12 @@ namespace ProbablePotato
         {
             // 生成数指定
             var iteration = this.potatoSeedService.GeneratePotatoNum();
-            var groupID = this.potatoSeedService.GeneratePotatoGroup();
 
             // 生成数分のオブジェクト(ゲームオブジェクトなし)生成
             List<UniTask<PotatoModel>> tasks = new List<UniTask<PotatoModel>>();
             for (int i = 0; i < iteration; i++)
             {
-                tasks.Add(this.potatoFactory.Create(groupID));
+                tasks.Add(this.potatoFactory.Create());
                 // 合計値を管理するオブジェクトに各オブジェクトの値を通知する
             }
 
@@ -61,7 +62,12 @@ namespace ProbablePotato
             foreach (var potato in result)
             {
                 var potatoView = this.potatoFactory.GeneratePotatoModelView(potato);
+                
+                // 通知用の値を用意
                 potatoTotal += potato.Value;
+
+                // 自身にオブジェクトを格納
+                valueModels.Add(potato);
             }
 
             // 生成したオブジェクトの値を合計してUIに通知
